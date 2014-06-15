@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bd:bank xmlns:bd="http://www.maksim.pryma/bankDepositXMLSchema"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.maksim.pryma/bankDepositXMLSchema bankDepositXMLSchema.xsd">
+
+    <deposit accountId="1234567890" depositType="calculated">
+        <bankName country="US">BSB</bankName>
+        <depositor>name1</depositor>
+        <amountOfDeposit>100</amountOfDeposit>
+        <profitability>7.2</profitability>
+        <timeConstraints>12</timeConstraints>
+    </deposit>
+    <deposit accountId="1234567891" depositType="cumulative">
+        <bankName country="BY">BSB</bankName>
+        <depositor>name2</depositor>
+        <amountOfDeposit>1200</amountOfDeposit>
+        <profitability>7.3</profitability>
+        <timeConstraints>14</timeConstraints>
+    </deposit>
+
+    <deposit accountId="1234567892" depositType="metallic">
+        <bankName country="BY">BIB</bankName>
+        <depositor>name3</depositor>
+        <amountOfDeposit>14000</amountOfDeposit>
+        <profitability>7.7</profitability>
+        <timeConstraints>24</timeConstraints>
+    </deposit>
+
+    <deposit accountId="1234567893" depositType="posteRestante">
+        <bankName country="BY">BIB</bankName>
+        <depositor>name4</depositor>
+        <amountOfDeposit>10000</amountOfDeposit>
+        <profitability>7.5</profitability>
+        <timeConstraints>15</timeConstraints>
+    </deposit>
+
+    <deposit accountId="1234567894" depositType="urgent">
+        <bankName country="PL">VTB</bankName>
+        <depositor>name5</depositor>
+        <amountOfDeposit>1900</amountOfDeposit>
+        <profitability>7.1</profitability>
+        <timeConstraints>30</timeConstraints>
+    </deposit>
+
+    <deposit accountId="1234567895" depositType="saving">
+        <bankName country="BY">VEB</bankName>
+        <depositor>name6</depositor>
+        <amountOfDeposit>19000</amountOfDeposit>
+        <profitability>7.8</profitability>
+        <timeConstraints>36</timeConstraints>
+    </deposit>
+    
+</bd:bank>
