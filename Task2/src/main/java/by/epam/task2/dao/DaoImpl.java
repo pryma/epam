@@ -18,33 +18,56 @@ public class DaoImpl implements Dao {
 
     public StringBuilder readText(String path) throws DaoException {
         StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader bufferedReader = null;
+
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+            bufferedReader = new BufferedReader(new FileReader(path));
             String next;
             while ((next = bufferedReader.readLine()) != null) {
                 stringBuilder.append(next).append("\n");
             }
-            bufferedReader.close();
 
         } catch (FileNotFoundException e) {
             logger.error(DaoErrorCode.DAO_001, e);
             throw new DaoException(DaoErrorCode.DAO_001, e);
-        } catch (IOException e) {
-            logger.error(DaoErrorCode.DAO_002, e);
-            throw new DaoException(DaoErrorCode.DAO_002, e);
-        }
 
+        } catch (IOException e) {
+            logger.error(DaoErrorCode.DAO_004, e);
+            throw new DaoException(DaoErrorCode.DAO_004, e);
+
+        } finally {
+            if (null != bufferedReader) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    logger.error(DaoErrorCode.DAO_002, e);
+                    throw new DaoException(DaoErrorCode.DAO_002, e);
+                }
+            }
+        }
         return stringBuilder;
     }
 
     public void writeText(String path, String text) throws DaoException {
+        Writer writer = null;
+
         try {
-            Writer writer = new BufferedWriter(new FileWriter(path));
+            writer = new BufferedWriter(new FileWriter(path));
             writer.write(text);
-            writer.close();
+
         } catch (IOException e) {
             logger.error(DaoErrorCode.DAO_003, e);
             throw new DaoException(DaoErrorCode.DAO_003, e);
+
+        } finally {
+            if (null != writer) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    logger.error(DaoErrorCode.DAO_002, e);
+                    throw new DaoException(DaoErrorCode.DAO_002, e);
+                }
+            }
         }
     }
 

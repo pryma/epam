@@ -7,7 +7,8 @@ public enum DaoErrorCode {
 
     DAO_001("Cannot find file %s"),
     DAO_002("Cannot close file %s"),
-    DAO_003("Cannot write file");
+    DAO_003("Cannot write file"),
+    DAO_004("Cannot read file");
 
     private final String value;
 
