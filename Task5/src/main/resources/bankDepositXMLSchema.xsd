@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://www.maksim.pryma/bankDepositXMLSchema"
+xmlns:bd="http://www.maksim.pryma/bankDepositXMLSchema">
+<element name="bank">
+	<complexType>
+		<sequence>
+			<element name="deposit" type="bd:Deposit" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+</element>
+
+<complexType name="Deposit">
+	<sequence>
+		<element name="bankName" type="bd:BankName"/>
+		<element name="depositor" type="string"/>
+		<element name="amountOfDeposit" type="integer"/>
+		<element name="profitability" type="float"/>
+		<element name="timeConstraints" type="integer"/>
+	</sequence>
+	<attribute name="accountId" type="bd:AccountId" use="required">
+		
+	</attribute>
+	<attribute name="depositType" type="bd:DepositType" use="required">
+		
+	</attribute>
+</complexType>
+
+<complexType name="BankName">
+    <simpleContent>
+        <extension base="string">
+            <attribute name="country" use="required">
+                <simpleType>
+                    <restriction base="string"/>
+                </simpleType>
+            </attribute>
+        </extension>
+    </simpleContent>
+
+</complexType>
+
+<simpleType name="AccountId">
+	<restriction base="string">
+		<pattern value="[a-zA-z0-9]{10}"/>
+	</restriction>
+</simpleType>
+
+<simpleType name="DepositType">
+	<restriction base="string">
+		<enumeration value="posteRestante"/>
+		<enumeration value="urgent"/>
+		<enumeration value="calculated"/>
+		<enumeration value="cumulative"/>
+		<enumeration value="saving"/>
+		<enumeration value="metallic"/>
+	</restriction>
+</simpleType>
+
+
+</schema>
