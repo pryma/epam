@@ -16,7 +16,7 @@ public class GatewayTest {
     @Test
     public void testRun() throws InterruptedException {
 
-        QueuesTrains queueTrains = QueuesTrains.getQueueTrains();
+        QueuesTrains queueTrains = QueuesTrains.getInstance();
 
         Random random = new Random();
 

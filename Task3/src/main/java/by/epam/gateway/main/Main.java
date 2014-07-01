@@ -19,7 +19,7 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
-        QueuesTrains queueTrains = QueuesTrains.getQueueTrains();
+        QueuesTrains queueTrains = QueuesTrains.getInstance();
 
         Random random = new Random();
 
@@ -29,7 +29,7 @@ public class Main {
         gateway1.setQueueTrains(queueTrains);
         gateway2.setQueueTrains(queueTrains);
 
-        ExecutorService executorService = Executors.newCachedThreadPool();
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
         executorService.execute(gateway1);
         executorService.execute(gateway2);
 
@@ -49,6 +49,8 @@ public class Main {
             Thread.sleep(1000);
 
         }
+
+        executorService.shutdown();
 
     }
 }

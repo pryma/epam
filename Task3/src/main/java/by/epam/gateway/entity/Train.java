@@ -30,13 +30,13 @@ public class Train implements Runnable{
 
     @Override
     public void run() {
-        LOGGER.info(" Start run Train " + way);
+        LOGGER.info("THREAD "+Thread.currentThread().getName()+" start run Train by way "+way);
         try {
             Thread.sleep(4000);
         } catch (InterruptedException e) {
             LOGGER.error("Train interrupted", e);
         }
-        getTunnel().getQueue().remove(this);
-        LOGGER.info(" Remove Train from Tunnel " + way);
+        getTunnel().removeTrain(this);
+        LOGGER.info("THREAD "+Thread.currentThread().getName()+" remove Train from Tunnel by way " + way);
     }
 }

@@ -12,7 +12,7 @@ public class QueuesTrains {
     private ConcurrentLinkedQueue<Train> queueEast;
     private ConcurrentLinkedQueue<Train> queueWest;
 
-    private static final QueuesTrains QUEUES_TRAINS = new QueuesTrains();
+    private static final QueuesTrains INSTANCE = new QueuesTrains();
 
     private QueuesTrains() {
         this.queueEast = new ConcurrentLinkedQueue<Train>();
@@ -22,8 +22,8 @@ public class QueuesTrains {
         this.queues.put(Way.EAST, queueEast);
     }
 
-    public static QueuesTrains getQueueTrains() {
-        return QUEUES_TRAINS;
+    public static QueuesTrains getInstance() {
+        return INSTANCE;
     }
 
     public Train getTrain(Way way) {
