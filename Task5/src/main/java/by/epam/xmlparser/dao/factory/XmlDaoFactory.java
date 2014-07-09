@@ -31,7 +31,7 @@ private static final XmlDaoFactory INSTANCE = new XmlDaoFactory();
 			return StaxXmlDao.getInstance();
 			
 		default:
-			throw new XmlDaoException("No such type of dao");
+			throw new XmlDaoException("No such type of DAO");
 		}	
 	}
 }

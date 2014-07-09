@@ -43,12 +43,12 @@ private Deposit initDeposit() {
             
             if (nodeDeposit instanceof Element) {
             	deposit = initDeposit();
-                Node nodeAttribute = nodeDeposit.getAttributes().getNamedItem(DepositTags.ACCOUNT_ID.toString());
+                Node nodeAttribute = nodeDeposit.getAttributes().getNamedItem(DepositTags.ACCOUNT_ID.getTag());
                 
                 if (null != nodeAttribute) {
                 	depositor.setAccountId(nodeAttribute.getNodeValue());
                 }
-                nodeAttribute = nodeDeposit.getAttributes().getNamedItem(DepositTags.DEPOSIT_TYPE.toString());
+                nodeAttribute = nodeDeposit.getAttributes().getNamedItem(DepositTags.DEPOSIT_TYPE.getTag());
                 if (null != nodeAttribute) {
                 	deposit.setDepositType(nodeAttribute.getNodeValue());
                 }
@@ -64,20 +64,20 @@ private Deposit initDeposit() {
                             String nodeContent = lastChildNode.getTextContent().trim();
                             String nodeName = depositChildNode.getNodeName();
 
-                            if (nodeName.equals(DepositTags.BANK_NAME.toString())) {
+                            if (nodeName.equals(DepositTags.BANK_NAME.getTag())) {
                             	bank.setBankName(nodeContent);
-                            	nodeAttribute = depositChildNode.getAttributes().getNamedItem(DepositTags.BANK_COUNTRY.toString());
+                            	nodeAttribute = depositChildNode.getAttributes().getNamedItem(DepositTags.BANK_COUNTRY.getTag());
                             	if(null != nodeAttribute) {
                             		bank.setCountryRegistration(nodeAttribute.getNodeValue());
                             	}
                             	
-                            } else if (nodeName.equals(DepositTags.DEPOSITOR.toString())) {
+                            } else if (nodeName.equals(DepositTags.DEPOSITOR.getTag())) {
                             	depositor.setDepositorName(nodeContent);
-                            } else if (nodeName.equals(DepositTags.AMOUNT_ON_DEPOSIT.toString())) {
+                            } else if (nodeName.equals(DepositTags.AMOUNT_ON_DEPOSIT.getTag())) {
                                 deposit.setAmountOnDeposit(Long.valueOf(nodeContent));
-                            } else if (nodeName.equals(DepositTags.PROFITABILITY.toString())) {
+                            } else if (nodeName.equals(DepositTags.PROFITABILITY.getTag())) {
                                 deposit.setProfitability(Double.valueOf(nodeContent));
-                            } else if (nodeName.equals(DepositTags.TIME_CONSTRAINTS.toString())) {
+                            } else if (nodeName.equals(DepositTags.TIME_CONSTRAINTS.getTag())) {
                                 deposit.setTimeConstraints(Integer.valueOf(nodeContent));
                             }
                         }

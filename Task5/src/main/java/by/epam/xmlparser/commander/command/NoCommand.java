@@ -8,12 +8,12 @@ import by.epam.xmlparser.controller.JspUrl;
 
 public class NoCommand implements ICommand{
 
-	@Override
+	//@Override
 	public String execute(HttpServletRequest request) throws CommandException {
 		
 		
 		
-		return JspUrl.ERROR_PAGE;
+		return JspUrl.ERROR_PAGE.getUrl();
 	}
 
 }

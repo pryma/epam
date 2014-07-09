@@ -1,5 +1,8 @@
 package by.epam.xmlparser.dao.staximpl;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.xml.stream.XMLInputFactory;
@@ -30,10 +33,14 @@ public class StaxXmlDao implements XmlDao{
         XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
         XMLStreamReader xmlStreamReader = null;
         try {
-            xmlStreamReader = xmlInputFactory.createXMLStreamReader(ClassLoader.getSystemResourceAsStream(nameXmlFile));
-        } catch (XMLStreamException e) {
-            throw new XmlDaoException("", e);
-        }
+        	InputStream inputStream = new FileInputStream(nameXmlFile);
+        	xmlStreamReader = xmlInputFactory.createXMLStreamReader(inputStream);
+            //xmlStreamReader = xmlInputFactory.createXMLStreamReader(ClassLoader.getSystemResourceAsStream(nameXmlFile));
+        } catch (FileNotFoundException e) {
+			throw new XmlDaoException("Cannot create FileInputStream to " + nameXmlFile, e);
+		} catch (XMLStreamException e) {
+            throw new XmlDaoException("Cannot create XMLStreamReader", e);
+        } 
         return xmlStreamReader;
     }
 

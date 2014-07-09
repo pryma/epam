@@ -8,7 +8,7 @@ public class XmlparserException extends Exception {
 	}
 	
 	public XmlparserException(String message, Exception e) {
-		super(message);
+		super(message, e);
 		this.hiddenException = e;
 	}
 

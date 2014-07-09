@@ -1,6 +1,8 @@
 package by.epam.xmlparser.dao.domimpl;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -42,11 +44,13 @@ public class DomXmlDao implements XmlDao{
         }
         Document depositDocument = null;
         try {
-            depositDocument = documentBuilder.parse(ClassLoader.getSystemResourceAsStream(nameXmlFile));
-        } catch (SAXException e) {
-        	throw new XmlDaoException("", e);
+        	InputStream inputStream = new FileInputStream(nameXmlFile);
+        	depositDocument = documentBuilder.parse(inputStream);
+            //depositDocument = documentBuilder.parse(ClassLoader.getSystemResourceAsStream(nameXmlFile));
         } catch (IOException e) {
-        	throw new XmlDaoException("", e);
+        	throw new XmlDaoException("Cannot create FileInputStream to "+nameXmlFile, e);
+        } catch (SAXException e) {
+        	throw new XmlDaoException("Cannot DOM parse XML file "+nameXmlFile, e);
         }
         return depositDocument;
     } 

@@ -13,18 +13,20 @@ import by.epam.xmlparser.dao.exception.XmlDaoException;
 import by.epam.xmlparser.dao.factory.DaoType;
 import by.epam.xmlparser.dao.factory.XmlDaoFactory;
 import by.epam.xmlparser.pojo.Deposit;
+import by.epam.xmlparser.service.DepositModel;
+import by.epam.xmlparser.service.ParserService;
+import by.epam.xmlparser.service.exception.ServiceException;
 
 public class SaxParseCommand implements ICommand {
 
 	public String execute(HttpServletRequest request) throws CommandException {
 		try {
-			XmlDao xmlDao = XmlDaoFactory.getInstance().getXmlDao(DaoType.SAX);
-			List<Deposit> deposits = xmlDao.parse(request.getParameter(RequestParameter.XML_FILE_NAME));
-			request.setAttribute(RequestParameter.DEPOSIT_LIST, deposits);
-		} catch (XmlDaoException e) {
+			List<DepositModel> deposits = ParserService.parse(DaoType.SAX, request.getParameter(RequestParameter.XML_FILE_NAME.getParameter()));
+			request.setAttribute(RequestParameter.DEPOSIT_LIST.getParameter(), deposits);
+		} catch (ServiceException e) {
 			throw new CommandException("Cannot execute SaxParseCommand", e);
 		}
-		return JspUrl.PARSE_DEPOSIT_RESULT_PAGE;
+		return JspUrl.PARSE_DEPOSIT_RESULT_PAGE.getUrl();
 	}
 
 }

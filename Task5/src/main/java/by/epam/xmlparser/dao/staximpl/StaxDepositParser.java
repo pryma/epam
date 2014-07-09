@@ -43,11 +43,11 @@ private Deposit initDeposit() {
 
 			    switch (event) {
 			        case XMLStreamConstants.START_ELEMENT:
-			            if (xmlStreamReader.getLocalName().equals(DepositTags.DEPOSIT.toString())) {
+			            if (xmlStreamReader.getLocalName().equals(DepositTags.DEPOSIT.getTag())) {
 			            	deposit = initDeposit();
 			            	depositor.setAccountId(xmlStreamReader.getAttributeValue(0));
 			            	deposit.setDepositType(xmlStreamReader.getAttributeValue(1));
-			            } else if (xmlStreamReader.getLocalName().equals(DepositTags.BANK_NAME.toString())) {
+			            } else if (xmlStreamReader.getLocalName().equals(DepositTags.BANK_NAME.getTag())) {
 							bank.setCountryRegistration(xmlStreamReader.getAttributeValue(0));
 						}
 			            break;
@@ -55,24 +55,24 @@ private Deposit initDeposit() {
 			            content = xmlStreamReader.getText().trim();
 			            break;
 			        case XMLStreamConstants.END_ELEMENT:
-			            if (xmlStreamReader.getLocalName().equals(DepositTags.BANK_NAME.toString())) {
+			            if (xmlStreamReader.getLocalName().equals(DepositTags.BANK_NAME.getTag())) {
 			            	bank.setBankName(content);
-			            } else if (xmlStreamReader.getLocalName().equals(DepositTags.DEPOSITOR.toString())) {
+			            } else if (xmlStreamReader.getLocalName().equals(DepositTags.DEPOSITOR.getTag())) {
 			            	depositor.setDepositorName(content);
-			            } else if (xmlStreamReader.getLocalName().equals(DepositTags.AMOUNT_ON_DEPOSIT.toString())) {
+			            } else if (xmlStreamReader.getLocalName().equals(DepositTags.AMOUNT_ON_DEPOSIT.getTag())) {
 			                deposit.setAmountOnDeposit(Long.valueOf(content));
-			            } else if (xmlStreamReader.getLocalName().equals(DepositTags.PROFITABILITY.toString())) {
+			            } else if (xmlStreamReader.getLocalName().equals(DepositTags.PROFITABILITY.getTag())) {
 			                deposit.setProfitability(Double.valueOf(content));
-			            } else if (xmlStreamReader.getLocalName().equals(DepositTags.TIME_CONSTRAINTS.toString())) {
+			            } else if (xmlStreamReader.getLocalName().equals(DepositTags.TIME_CONSTRAINTS.getTag())) {
 			                deposit.setTimeConstraints(Integer.valueOf(content));
 			            } 
 			            break;
 			    }
 			}
 		} catch (NumberFormatException e) {
-			throw new XmlDaoException("", e);
+			throw new XmlDaoException("Illegal number into "+content, e);
 		} catch (XMLStreamException e) {
-			throw new XmlDaoException("", e);
+			throw new XmlDaoException("Cannot hasNext from XMLStreamReader", e);
 		}
         return deposits;
     }

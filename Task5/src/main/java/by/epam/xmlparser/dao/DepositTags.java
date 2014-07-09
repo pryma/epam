@@ -18,8 +18,7 @@ public enum DepositTags {
         this.tag = tag;
     }
 
-    @Override
-    public String toString() {
+    public String getTag() {
         return tag;
     }
 }

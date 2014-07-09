@@ -8,7 +8,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import by.epam.xmlparser.dao.DepositTags;
-import by.epam.xmlparser.dao.exception.XmlDaoException;
 import by.epam.xmlparser.pojo.Bank;
 import by.epam.xmlparser.pojo.Deposit;
 import by.epam.xmlparser.pojo.Depositor;
@@ -39,57 +38,35 @@ public class SaxDepositHandler extends DefaultHandler {
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        if (qName.equals(DepositTags.DEPOSIT.toString())) {
+        if (qName.equals(DepositTags.DEPOSIT.getTag())) {
         	deposit = initDeposit();
         	
-        	depositor.setAccountId(attributes.getValue(DepositTags.ACCOUNT_ID.toString()));
-        	deposit.setDepositType(attributes.getValue(DepositTags.DEPOSIT_TYPE.toString()));
+        	depositor.setAccountId(attributes.getValue(DepositTags.ACCOUNT_ID.getTag()));
+        	deposit.setDepositType(attributes.getValue(DepositTags.DEPOSIT_TYPE.getTag()));
         }
-        if (qName.equals(DepositTags.BANK_NAME.toString())) {
-			bank.setBankName(attributes.getValue(DepositTags.BANK_NAME.toString()));
+        if (qName.equals(DepositTags.BANK_NAME.getTag())) {
+			bank.setCountryRegistration(attributes.getValue(DepositTags.BANK_COUNTRY.getTag()));
 		}
     }
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-
-        switch (DepositTags.valueOf(qName)) {
-		case BANK_NAME:
-			bank.setBankName(content);
-			break;
-		case DEPOSITOR:
-			depositor.setDepositorName(content);
-			break;
-		case AMOUNT_ON_DEPOSIT:
-			deposit.setAmountOnDeposit(Long.valueOf(content));
-			break;
-		case PROFITABILITY:
-			deposit.setProfitability(Double.valueOf(content));
-			break;
-		case TIME_CONSTRAINTS:
-			deposit.setTimeConstraints(Integer.valueOf(content));
-
-		default:
-			
-			
-		}
     	
-    	
-    	/*if (qName.equals(DepositTags.BANK_NAME.toString())) {
+    	if (qName.equals(DepositTags.BANK_NAME.getTag())) {
         	bank.setBankName(content);
         } 
-        if (qName.equals(DepositTags.DEPOSITOR.toString())) {
+        if (qName.equals(DepositTags.DEPOSITOR.getTag())) {
         	depositor.setDepositorName(content);
         }
-        if (qName.equals(DepositTags.AMOUNT_ON_DEPOSIT.toString())) {
+        if (qName.equals(DepositTags.AMOUNT_ON_DEPOSIT.getTag())) {
             deposit.setAmountOnDeposit(Long.valueOf(content));
         }
-        if (qName.equals(DepositTags.PROFITABILITY.toString())) {
+        if (qName.equals(DepositTags.PROFITABILITY.getTag())) {
         	deposit.setProfitability(Double.valueOf(content));
         }
-        if (qName.equals(DepositTags.TIME_CONSTRAINTS.toString())) {
+        if (qName.equals(DepositTags.TIME_CONSTRAINTS.getTag())) {
         	deposit.setTimeConstraints(Integer.valueOf(content));
-        }*/
+        }
     }
 
     @Override

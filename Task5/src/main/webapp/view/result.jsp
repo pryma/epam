@@ -14,9 +14,28 @@
 <body>
 
 <table>
+	<tr>
+		<td>Bank Name</td>
+    	<td>Country Registration</td>
+    	<td>Depositor accountId</td>
+    	<td>Depositor Name</td>
+    	<td>Deposit Type</td>
+    	<td>Amount On Deposit</td>
+    	<td>Profitability</td>
+    	<td>Time Constraints</td>
+	</tr>
 
-    <c:forEach var="movie" items="${simpleinfo}" >
-        <tr> <td>${movie}</td> </tr>
+    <c:forEach var="deposit" items="${depositList}" >
+    <tr>
+    <td>${deposit.bankName}</td>
+    <td>${deposit.countryRegistration}</td>
+    <td>${deposit.accountId}</td>
+    <td>${deposit.depositorName}</td>
+    <td>${deposit.depositType}</td>
+    <td>${deposit.amountOnDeposit}</td>
+    <td>${deposit.profitability}</td>
+    <td>${deposit.timeConstraints}</td>
+    </tr>
     </c:forEach>
 </table>
 

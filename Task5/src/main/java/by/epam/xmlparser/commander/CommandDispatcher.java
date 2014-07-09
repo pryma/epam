@@ -1,43 +1,31 @@
 package by.epam.xmlparser.commander;
 
-import by.epam.xmlparser.commander.command.DomParseCommand;
-import by.epam.xmlparser.commander.command.NoCommand;
-import by.epam.xmlparser.commander.command.SaxParseCommand;
-import by.epam.xmlparser.commander.command.StaxParseCommand;
+import by.epam.xmlparser.commander.command.CommandContainer;
+import by.epam.xmlparser.commander.command.CommandType;
 
 
 public class CommandDispatcher {
 	
-/*	private static final CommandContainer INSTANCE = new CommandContainer();
-	private Map<CommandType, ICommand> container = new HashMap<CommandType, ICommand>();
+	private static final CommandDispatcher INSTANCE = new CommandDispatcher();
+	private CommandContainer container;
 	
-	private CommandContainer() {
-		container.put(CommandType.DOM_PARSE, new DomParseCommand());
-		container.put(CommandType.SAX_PARSE, new SaxParseCommand());
-		container.put(CommandType.STAX_PARSE, new StaxParseCommand());
+	private CommandDispatcher() {
+		container = CommandContainer.getInstance();
 	}
 	
-	public static CommandContainer getInstance() {
+	public static CommandDispatcher getInstance() {
 		return INSTANCE;
-	}*/
+	}
 	
-	public static ICommand getCommand(String commandName) {
-		CommandType command = CommandType.valueOf(commandName.toUpperCase());
-		
-		switch (command) {
-		
-		case DOM_PARSE:
-			return new DomParseCommand();
-		case SAX_PARSE:
-			return new SaxParseCommand();
-		case STAX_PARSE:
-			return new StaxParseCommand();
-
-		default:
-			
-			return new NoCommand();
+	public ICommand getCommand(String commandName) {
+		CommandType commandType = CommandType.valueOf(commandName.toUpperCase());
+		ICommand command;
+		if (null != commandType) {
+			command = container.getCommand(commandType);
+		} else {
+			command = container.getCommand(CommandType.NOT_SUCH_COMMAND);
 		}
-		
+		return command;
 	}
 
 }
